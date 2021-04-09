@@ -8,7 +8,9 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('目录服务')
 @Controller('api/v1/folder')
 export class FolderController {
   @Get()
