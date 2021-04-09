@@ -11,7 +11,7 @@ import { FileService, FILE_SERVICE } from './services/file.service';
 
 export const FILE_REPOSITORY = 'FILE_REPOSITORY';
 export const FOLDER_REPOSITORY = 'FOLDER_REPOSITORY';
-export const RECYCLEBIN_REPOSITORY = 'RECYCLEBIN_REPOSITORY';
+export const RECYCLE_BIN_REPOSITORY = 'RECYCLE_BIN_REPOSITORY';
 
 @Module({
   imports: [DatabaseModule],
@@ -30,7 +30,7 @@ export const RECYCLEBIN_REPOSITORY = 'RECYCLEBIN_REPOSITORY';
       inject: [DATABASE_CONNECTION],
     },
     {
-      provide: RECYCLEBIN_REPOSITORY,
+      provide: RECYCLE_BIN_REPOSITORY,
       useFactory: (connection: Connection) =>
         connection.getRepository(RecyclebinEntity),
       inject: [DATABASE_CONNECTION],
