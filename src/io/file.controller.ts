@@ -18,6 +18,7 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { FileDTO } from './dto/file.dto';
 import { FILE_SERVICE, IFileService } from './services/file.service';
 
 @ApiTags('文件服务')
@@ -58,7 +59,7 @@ export class FileController {
   })
   @ApiOkResponse({
     description: '返回文件列表',
-    type: String,
+    type: FileDTO,
   })
   @ApiBadRequestResponse({
     description: '模型验证失败',
@@ -72,8 +73,8 @@ export class FileController {
     @Query('sortBy') sortBy?: string | undefined,
     @Query('page') page?: number | undefined,
     @Query('pageSize') pageSize?: number | undefined,
-  ): Promise<string> {
-    return await this.fileService.getAll();
+  ): Promise<FileDTO[]> {
+    return await this.fileService.getAll(search, sortBy, page, pageSize);
   }
 
   @ApiParam({
