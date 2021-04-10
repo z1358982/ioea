@@ -1,8 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { DataState } from './data-state';
 
-@Entity()
-export class RecyclebinEntity {
+@Entity('recycle_bin')
+export class RecycleBinEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -18,6 +23,6 @@ export class RecyclebinEntity {
   @Column()
   creator: string;
 
-  @Column()
+  @CreateDateColumn()
   createTime: Date;
 }
