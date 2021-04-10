@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { FileDTO } from '../dto/file.dto';
 import { FileEntity } from '../entities/file.entity';
-import { FILE_REPOSITORY } from '../io.module';
+import { FILE_REPOSITORY } from '../entities/repository.providers';
 
 export const FILE_SERVICE = 'FILE_SERVICE';
 

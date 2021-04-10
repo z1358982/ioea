@@ -1,5 +1,5 @@
 export enum DataState {
-  normal = 0,
-  deleted = 1,
-  cascadeDeleted = 9,
+  Normal = 0,
+  Deleted = 1,
+  CascadeDeleted = 9,
 }

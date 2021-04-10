@@ -1,7 +1,20 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  Tree,
+  TreeChildren,
+  TreeLevelColumn,
+  TreeParent,
+  UpdateDateColumn,
+} from 'typeorm';
 import { DataState } from './data-state';
+import { FileEntity } from './file.entity';
 
-@Entity()
+@Entity('folder')
+@Tree('materialized-path')
 export class FolderEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -18,9 +31,24 @@ export class FolderEntity {
   @Column()
   creator: string;
 
-  @Column()
+  @CreateDateColumn()
   createTime: Date;
 
-  @Column()
+  @UpdateDateColumn()
   lastModified: Date;
+
+  @Column({ nullable: true })
+  parentId?: number | null | undefined;
+
+  @TreeParent()
+  parent: FolderEntity;
+
+  @TreeChildren()
+  directories: FolderEntity[];
+
+  @OneToMany(() => FileEntity, (f) => f.folder)
+  files: FileEntity[];
+
+  @TreeLevelColumn()
+  depth: number;
 }

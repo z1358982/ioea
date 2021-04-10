@@ -1,7 +1,15 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { DataState } from './data-state';
+import { FolderEntity } from './folder.entity';
 
-@Entity()
+@Entity('file')
 export class FileEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -24,9 +32,15 @@ export class FileEntity {
   @Column()
   creator: string;
 
-  @Column()
+  @CreateDateColumn()
   createTime: Date;
 
-  @Column()
+  @UpdateDateColumn()
   lastModified: Date;
+
+  @Column({ nullable: true })
+  folderId?: number | null | undefined;
+
+  @ManyToMany(() => FolderEntity, (f) => f.files)
+  folder: FolderEntity;
 }
